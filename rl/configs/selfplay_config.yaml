@@ -26,6 +26,8 @@ env:
     see_scout_reward: True
     top_opponents: 2 # will playoff every permutation of the top 3 roles
 
+resources:
+  cpu: 1
 
 
 # the actual mapping from agents to policies is independent of policy configurations
@@ -56,9 +58,8 @@ agent_roles: [0, 1, 2, 3]
 policy_mapping: [0, 1, 2, 3]  # db only currently works for 4
 # unique roles.
 self_play: True
-# db_name: /home/jovyan/interns/ben/BrainHack-TIL25/selfplay/Orchestrator_6b7c101e/test.db
-db_name: /mnt/e/BrainHack-TIL25/selfplay/Orchestrator_a784ccfd/selfplay_4pol.db
-# db_name: selfplay_4pol.db
+# db_name: /mnt/e/BrainHack-TIL25/selfplay/Orchestrator_a784ccfd/selfplay_4pol.db
+db_name: selfplay_4pol.db
 
 train:
   num_loops: 10000
@@ -69,8 +70,7 @@ train:
   # you, so if you set this to be 250000, and have 2 vec envs * 4 agents, it will be 250k * 2 * 4 = 2mil
   n_eval_episodes: 1
   num_evals: 2
-  root_dir: '/mnt/e/BrainHack-TIL25/selfplay'
-  # root_dir: '/home/jovyan/interns/ben/BrainHack-TIL25/selfplay'
+  root_dir: '/mnt/e/BrainHack-TIL25/new_selfplay'
   experiment_name: 'selfplay_4pol'
   use_action_masking: True
   no_improvement: 5

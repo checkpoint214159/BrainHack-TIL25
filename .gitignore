@@ -191,3 +191,5 @@ selfplay
 # DB stuff
 *.db
 *.sql
+
+new_selfplay

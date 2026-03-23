@@ -1,0 +1,88 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="Page-1" id="Vz7GUVj_4COXq7O9QjWr">
+    <mxGraphModel dx="1572" dy="1577" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="MaLedZJRDpN0NssFaF53-4" edge="1" parent="1" source="MaLedZJRDpN0NssFaF53-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="MaLedZJRDpN0NssFaF53-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Entrypoint: Orchestrator" vertex="1">
+          <mxGeometry height="40" width="120" x="240" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-13" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="150" width="160" x="110" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-8" parent="MaLedZJRDpN0NssFaF53-13" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.config_rule;fillColor=#d80073;fontColor=#ffffff;strokeColor=#A50040;" value="" vertex="1">
+          <mxGeometry height="72" width="55.5" x="14.5" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-9" parent="MaLedZJRDpN0NssFaF53-13" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.config_rule;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" value="" vertex="1">
+          <mxGeometry height="72" width="55.5" x="80" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-10" parent="MaLedZJRDpN0NssFaF53-13" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Create hyperparam search spaces" vertex="1">
+          <mxGeometry height="30" width="80" x="30" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-11" parent="MaLedZJRDpN0NssFaF53-13" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Policy-dependent" vertex="1">
+          <mxGeometry height="30" width="80" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-12" parent="MaLedZJRDpN0NssFaF53-13" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Policy-independent" vertex="1">
+          <mxGeometry height="30" width="80" x="80" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Rollout: n_rollout_steps" vertex="1">
+          <mxGeometry height="60" width="120" x="268.25" y="1010" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-20" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="on_rollout_start callbacks" vertex="1">
+          <mxGeometry height="60" width="120" x="270" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-21" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="post rollout&lt;div&gt;&amp;nbsp;callbacks&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="268.25" y="1090" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-23" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="load policies&amp;nbsp;&lt;div&gt;/ from scratch&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="414" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-24" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="Samples hparams" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-25" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="tuner.fit (one loop)" vertex="1">
+          <mxGeometry height="1065" width="1250" x="-325" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-29" parent="MaLedZJRDpN0NssFaF53-25" style="swimlane;whiteSpace=wrap;html=1;" value="CustomTrainer setup (runs every new instance)" vertex="1">
+          <mxGeometry height="400" width="1165" x="35" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-18" parent="MaLedZJRDpN0NssFaF53-29" style="rounded=0;whiteSpace=wrap;html=1;" value="RolloutSimulator" vertex="1">
+          <mxGeometry height="70" width="160" x="30" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-34" parent="MaLedZJRDpN0NssFaF53-25" style="swimlane;whiteSpace=wrap;html=1;" value="CustomTrainer step (runs for n samples)" vertex="1">
+          <mxGeometry height="400" width="1165" x="65" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-35" parent="MaLedZJRDpN0NssFaF53-34" style="rounded=0;whiteSpace=wrap;html=1;" value="CustomTrainer (inherit ray.tune.Trainable)&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;-&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="160" x="30" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-27" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="111" width="80" x="17.75" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-6" parent="MaLedZJRDpN0NssFaF53-27" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.config_rule;fillColor=#759C3E;gradientColor=none;" value="" vertex="1">
+          <mxGeometry height="72" width="55.5" x="12.25" y="39" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-7" parent="MaLedZJRDpN0NssFaF53-27" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Loads Training + Env Config" vertex="1">
+          <mxGeometry height="30" width="80" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-28" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="50" width="80" x="480" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-15" parent="MaLedZJRDpN0NssFaF53-28" style="verticalLabelPosition=bottom;sketch=0;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;verticalAlign=top;pointerEvents=1;align=center;shape=mxgraph.cisco_safe.people_places_things_icons.icon8;fontColor=#ffffff;" value="" vertex="1">
+          <mxGeometry height="50" width="19.5" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-16" parent="MaLedZJRDpN0NssFaF53-28" style="verticalLabelPosition=bottom;sketch=0;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;verticalAlign=top;pointerEvents=1;align=center;shape=mxgraph.cisco_safe.people_places_things_icons.icon8;fontColor=#ffffff;" value="" vertex="1">
+          <mxGeometry height="50" width="19.5" x="30.25" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-17" parent="MaLedZJRDpN0NssFaF53-28" style="verticalLabelPosition=bottom;sketch=0;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;verticalAlign=top;pointerEvents=1;align=center;shape=mxgraph.cisco_safe.people_places_things_icons.icon8;fontColor=#ffffff;" value="" vertex="1">
+          <mxGeometry height="50" width="19.5" x="60.5" as="geometry" />
+        </mxCell>
+        <mxCell id="MaLedZJRDpN0NssFaF53-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="CustomTrainer (inherit ray.tune.Trainable)&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;-&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="160" x="1250" y="460" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

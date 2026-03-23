@@ -4,70 +4,68 @@ Yoink from gridworld.py, but mutates with a whole host of additional functionali
 import random
 import supersuit as ss
 import functools
-import logging
 import warnings
 import os
 import hashlib
 import cv2
-import time
 import gymnasium
 import numpy as np
 import pygame
 import inspect
 import hashlib
-import secrets
 import json
 import torch
-
+from otherppos import ModifiedMaskedPPO
+from pettingzoo.utils.env import ActionType, AgentID
 from rl.db.db import RL_DB
 from copy import deepcopy
-from functools import partial
 from pettingzoo.utils.conversions import aec_to_parallel
-from pettingzoo.utils.conversions import aec_to_parallel_wrapper
-from pettingzoo.utils.conversions import parallel_to_aec_wrapper
-from pettingzoo.utils.wrappers.order_enforcing import OrderEnforcingWrapper
-from pettingzoo.utils.env import ParallelEnv
 from collections import defaultdict
 from gymnasium.spaces import Box, Dict, Discrete
-from gymnasium.utils.seeding import np_random
-from mazelib import Maze
-from mazelib.generate.DungeonRooms import DungeonRooms
-from pettingzoo import AECEnv
 from pettingzoo.utils import AgentSelector, wrappers
-from pettingzoo.utils.conversions import parallel_wrapper_fn
-from pettingzoo.utils.env import ActionType, AgentID, ObsType
 from pettingzoo.utils.wrappers.base import BaseWrapper
 from pettingzoo.utils.wrappers.base_parallel import BaseParallelWrapper
-from supersuit import frame_stack_v2
-from til_environment.flatten_dict import FlattenDictWrapper
 from til_environment.helpers import (
-    convert_tile_to_edge,
     get_bit,
     idx_to_view,
     is_idx_valid,
     is_world_coord_valid,
-    manhattan,
     rotate_right,
-    supercover_line,
     view_to_idx,
     view_to_world,
     world_to_view,
 )
-from til_environment.types import Action, Direction, Player, RewardNames, Tile, Wall
-from einops import rearrange
+from til_environment.types import Action, Direction, Player, Tile, Wall
 
 from supersuit.utils.frame_stack import stack_init, stack_obs, stack_obs_space
 from til_environment.gridworld import raw_env
 
-from sb3_contrib.common.envs import InvalidActionEnvDiscrete
 from pettingzoo.utils.wrappers import BaseWrapper
 
 from supersuit.generic_wrappers.utils.base_modifier import BaseModifier
 from supersuit.generic_wrappers.utils.shared_wrapper_util import shared_wrapper
 
-from otherppos import ModifiedMaskedPPO, ModifiedPPO
+from enum import StrEnum, auto
 
-from stable_baselines3.common.vec_env import DummyVecEnv
+class CustomRewardNames(StrEnum):
+    GUARD_WINS = auto()
+    GUARD_CAPTURES = auto()
+    SCOUT_CAPTURED = auto()
+    SCOUT_RECON = auto()
+    SCOUT_MISSION = auto()
+    WALL_COLLISION = auto()
+    AGENT_COLLIDER = auto()
+    AGENT_COLLIDEE = auto()
+    STATIONARY_PENALTY = auto()
+    GUARD_TRUNCATION = auto()
+    SCOUT_TRUNCATION = auto()
+    GUARD_STEP = auto()
+    SCOUT_STEP = auto()
+    SCOUT_STEP_EMPTY_TILE = auto()
+    LOOKING = auto()
+    FORWARD = auto()
+    BACKWARD = auto()
+
 
 class DummyGymEnv(gymnasium.Env):
     def __init__(self, observation_space, action_space):
@@ -83,7 +81,6 @@ def build_env(
     self_play,
     db_path,
     env_config,
-    num_iters=100,
     env_wrappers: list[BaseWrapper] | None = None,
 ):
     """
@@ -117,6 +114,7 @@ def build_env(
     top_opponents  = _env_config.pop('top_opponents', 1)
     collisions = _env_config.pop('collisions', True)
     viewcone_only = _env_config.pop('viewcone_only', False)
+    num_iters = _env_config.pop('num_iters', 100)
 
     orig_env = modified_env(
         render_mode=render_mode,
@@ -407,7 +405,7 @@ class SelfPlayWrapper(BaseParallelWrapper):
         are being evaluated is contained within the environment. This feels wrong but oh well, what todo.
         """
         # first, look at actions. For agent ids with -1, those indexes are meant to be controlled by us.
-        env_agents = [k for k, v in actions.items() if v.item() is -1]
+        env_agents = [k for k, v in actions.items() if v.item() == -1]
         
         # check if we have chosen our policies yet. self.choose_policies should be called only after every reset.
         if self.has_reset:

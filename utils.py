@@ -1,4 +1,5 @@
 from collections import defaultdict
+import re
 
 def generate_policy_agent_indexes(selfplay, n_envs, policy_mapping):
         """
@@ -31,27 +32,27 @@ def generate_policy_agent_indexes(selfplay, n_envs, policy_mapping):
         }
 
         Selfplay run, policy_mapping [None, 0, 0, 0], agent_roles [0, 1, 2, 3].  Because during selfplay
-        we only learn one policy at a time, 1 -> None from an earlier component.
+        we only learn one policy at a time, and 1 -> None from an earlier component.
         Vector environments will be automatically set to 3 by earlier components too.
         Return: {
-            0: [1, 6, 11]
+            0: [1, 6, 11]  # yes, for 3 vector envs! Once again we are only training one policy at a time, per vector env.
         }
         For the first vec env, actions will be [None, action_from_polid_0, None, None] -> 1st index occupied
         For the second vec env, actions will be [None, None, action_from_polid_0, None] -> 2st index occupied + 4 = 6th global index
         For the first vec env, actions will be [None, None, None action_from_polid_0] -> 3rd index occupied + 8 = 11th global index
         Action sent off to env: [
             None,
-            action_from_polid_0,  -> 1
+            action_from_polid_0,  -> 1st index
             None,
             None,
             None,
             None,
-            action_from_polid_0,  -> 6
+            action_from_polid_0,  -> 6th index
             None,
             None,
             None,
             None,
-            action_from_polid_0,  -> 11
+            action_from_polid_0,  -> 11th index
         ]
         """
         policy_indexes = {}
@@ -77,3 +78,29 @@ def generate_policy_agent_indexes(selfplay, n_envs, policy_mapping):
                         policy_indexes[polid].append(idx)
 
         return policy_indexes
+
+    
+def split_dict_by_prefix(source_dict):
+    pattern = re.compile(r"^(\d+)/(.+)$")  # this is chatgpt'd. i have no idea of regex works.
+    grouped = defaultdict(dict)
+
+    for key, value in source_dict.items():
+        match = pattern.match(key)
+        if match:
+            prefix, suffix = match.groups()
+            grouped[int(prefix)][suffix] = value
+    return dict(grouped)  # convert defaultdict to regular dict
+    
+
+
+def replace_and_report(base: dict, override: dict, merge=False) -> dict:
+    merged = base.copy()
+    for key, value in override.items():
+        if key in base and base[key] != value:
+            print(f"Overriding key '{key}': {base[key]} -> {value}")
+            merged[key] = value
+        elif merge:
+            print(f"Adding new key '{key}': {value}")
+            merged[key] = value
+
+    return merged

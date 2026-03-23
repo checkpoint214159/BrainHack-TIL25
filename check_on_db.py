@@ -29,7 +29,7 @@ class Observer:
     # def get_checkpoint_by_role():
 
 obs = Observer(
-    path='/mnt/e/BrainHack-TIL25/selfplay/Orchestrator_a784ccfd/selfplay_4pol.db',
+    path='/mnt/e/BrainHack-TIL25/new_selfplay/Orchestrator_419d30cb/selfplay_4pol.db',
     policy_mapping=[0, 1, 2, 3],
     top_few=3
 )
